@@ -11,8 +11,10 @@ public class PlayerCharacter : MonoBehaviour
     public string requiredItem = null;
     private Interactable interactable = null;
 
-    
-
+    public GameObject player;
+    public Rigidbody rigidbody;
+    public GameObject pig;
+    public bool piging;
 
     void Update()
     {
@@ -28,7 +30,7 @@ public class PlayerCharacter : MonoBehaviour
             else if (currentInteractable != null && inventory.hasItem)
             {
                 interactable = currentInteractable.GetComponent<Interactable>();
-               
+            
                 if(interactable.RequiredItem.ToLower() == inventory.item.name.ToLower())
                 {
                     UseItem(inventory.item);
@@ -48,7 +50,21 @@ public class PlayerCharacter : MonoBehaviour
                 DropItem(inventory.item);
             }
         }
+        if(currentPickupItem != null){
+            if (currentPickupItem.name == "pig"){
+                piging = true;
+            }
+        }
+        if(Keyboard.current.tKey.isPressed && piging)
+        {
+            pig.SetActive(true);
+            pig.transform.SetPositionAndRotation(player.transform.position, player.transform.rotation);
+            rigidbody.linearVelocity = pig.transform.forward * 10;
+            piging = false;
+        }
     }
+        
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -65,6 +81,7 @@ public class PlayerCharacter : MonoBehaviour
             
 
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -79,6 +96,7 @@ public class PlayerCharacter : MonoBehaviour
         {
             currentInteractable = null;
         }
+        
     }
 
     private void PickupItem(GameObject itemObject)
