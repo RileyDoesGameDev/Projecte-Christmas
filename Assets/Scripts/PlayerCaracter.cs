@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,10 @@ public class PlayerCharacter : MonoBehaviour
 
     public string requiredItem = null;
     private Interactable interactable = null;
+
+    
+
+
     void Update()
     {
         // Check for E key press in Update (runs every frame)
@@ -97,10 +102,16 @@ public class PlayerCharacter : MonoBehaviour
 
     private void UseItem(GameObject itemObject)
     {
+
+
+        interactable.Triggered = true;
         inventory.hasItem = false;
+        
         Destroy(itemObject);
         inventory.item = null;
         inventory.itemTag = null;
+        
         Debug.Log($"Used: {itemObject.name}");
+
     }
 }

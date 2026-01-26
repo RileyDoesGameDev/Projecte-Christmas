@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,9 +6,9 @@ public class Phone : MonoBehaviour
 {
 
     public GameObject currentPlayer = null;
-    public GameObject PhoneCaller;
-   
-   
+
+
+    public event Action OnPhoneAwnsered;
     
     void Start()
     {
@@ -46,8 +47,7 @@ public class Phone : MonoBehaviour
 
     private void UsePhone()
     {
-        PhoneCaller.SetActive(true);
-
+        OnPhoneAwnsered?.Invoke();
         Destroy(gameObject);
     }
 

@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
     public string RequiredItem;
+    public bool Triggered;
+
+  
     void Start()
     {
         
@@ -15,9 +19,6 @@ public class Interactable : MonoBehaviour
     }
 
 
-    private void OnDisable()
-    {
-        
-    }
+  
 
 }
