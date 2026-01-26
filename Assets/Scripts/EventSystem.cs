@@ -23,14 +23,6 @@ public class EventSystem : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
-    public void OnPlayHouverEnter()
-    {
-
-    }
-
-    public void OnPlayHouverExit()
-    {
-
-    }
+    
 
 }
