@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Window
   - Bomb
+  - BombItem1
+  - BombItem2
+  - BombItem3
   layers:
   - Default
   - TransparentFX

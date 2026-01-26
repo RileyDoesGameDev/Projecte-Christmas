@@ -1,61 +1,47 @@
 using UnityEngine;
-using itemNameSpace;
-namespace ItemHoldNameSpace
-{
-    public class ItemHold : MonoBehaviour
-    {
+namespace ItemHoldNameSpace{
+    public class ItemHold : MonoBehaviour{
         public static ItemHold Instance { get; private set; }
-        public GameObject player;
+        public GameObject player, bomb;
         private GameObject healdItem;
-        public GameObject bomb;
-        public static int bombItemNumber = 0;
-        private void Awake()
-        {
-            // if (Instance != null && Instance != this)
-            // {
-            //     Destroy(gameObject);
-            //     return;
-            // }
-            Instance = this;
-        }
-
-        public void Hold(GameObject item)
-        {   
-            if(healdItem is not null){
-                //doing the bomb stuff
-                // if(Instance.healdItem.CompareTag("BombItem1")) bombItemNumber = 1; 
-                // else if(Instance.healdItem.CompareTag("BombItem2") && bombItemNumber == 1) bombItemNumber = 2;
-                // else if(Instance.healdItem.CompareTag("BombItem3") && bombItemNumber == 2) bomb.transform.position = player.transform.position;
-                // else{
-                    healdItem.transform.position += Vector3.up * 10f;
-                    bombItemNumber = 0;
-                //}
-                
-            }
+        public static int bombItemNumber;
+        public Rigidbody rigidbody;
+        private void Awake(){Instance = this;}
+        public void Hold(GameObject item){   
+            if(healdItem is not null) healdItem.transform.position = player.transform.position;
             healdItem = item;
             healdItem.transform.position += Vector3.down * 10f;
         }
-        
-        // Optional: static access wrapper
-        public static void HoldStatic(GameObject item)
-        {
-            if (Instance != null){
-                if(Instance.healdItem.CompareTag("BombItem1")) bombItemNumber = 1; 
-                else if(Instance.healdItem.CompareTag("BombItem2") && bombItemNumber == 1) bombItemNumber = 2;
-                else if(Instance.healdItem.CompareTag("BombItem3") && bombItemNumber == 2) Instance.bomb.transform.position = Instance.player.transform.position;
-                
-                Instance.Hold(item);            
+        public static void HoldStatic(GameObject item){
+            if(Instance != null){
+                Instance.Hold(item);
+                BombCraftStatic();      
             }
         }
-        public static GameObject GetHealdItemStatc()
-        {
-            return Instance.GetHealdItem();
+        public static void BombCraftStatic(){
+            Debug.Log(bombItemNumber + "");
+            if(Instance.healdItem.CompareTag("BombItem1")){
+                bombItemNumber = 1;
+                Instance.healdItem.SetActive(false);
+            } 
+            else if(Instance.healdItem.CompareTag("BombItem2") && bombItemNumber == 1){
+                bombItemNumber = 2;
+                Instance.healdItem.SetActive(false);
+            }
+            else if(Instance.healdItem.CompareTag("BombItem3") && bombItemNumber == 2) Instance.MoveBomb();
+            //else bombItemNumber = 0;
         }
-        public GameObject GetHealdItem()
-        {
-            return healdItem;
-        }
-    }
+        public void MoveBomb(){
 
+            Debug.Log("BOmb made");
+            Instance.healdItem.SetActive(false);
+            bomb.transform.SetPositionAndRotation(player.transform.position, player.transform.rotation);
+            bombItemNumber = 0;
+            rigidbody.isKinematic = false;
+            rigidbody.linearVelocity = bomb.transform.forward * 0;
+            Instance.Hold(bomb);
+        }
+        public static GameObject GetHealdItemStatc(){return Instance.GetHealdItem();}
+        public GameObject GetHealdItem(){return healdItem;}
+    }
 }
-    
