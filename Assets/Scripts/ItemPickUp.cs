@@ -6,6 +6,7 @@ namespace itemNameSpace{
     {
         public GameObject item;
         public bool canPickUp;
+       // public PlayerInventory inventory;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -20,9 +21,11 @@ namespace itemNameSpace{
                 if (Keyboard.current.eKey.isPressed)
                 {
                     //ItemHold itemHolder = new ItemHold();
-                    ItemHold.HoldStatic(item);
+                    
                 }
             }
+
+
                 
         }
         // public void MoveUp()
@@ -30,6 +33,8 @@ namespace itemNameSpace{
         //     item.transform.position += Vector3.up * 10f;
         // }
         private void OnTriggerEnter(Collider other) {
+
+           
             canPickUp = true;
         }
         private void OnTriggerExit(Collider other) {
