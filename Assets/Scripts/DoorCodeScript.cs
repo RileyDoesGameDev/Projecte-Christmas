@@ -1,16 +1,16 @@
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class DoorCodeScript : MonoBehaviour
 {
-    public GameObject textBox;
-    public GameObject textPrompt;
-    private void OnTriggerEnter(Collider other) {
-        textBox.SetActive(true);
-        textPrompt.SetActive(true);
-    }
+   public GameObject up;
+   public GameObject down;
+   public GameObject left;
+   public GameObject right;
+   public GameObject a;
+   public GameObject b;
+   void Update()
+    {
         
-    private void OnTriggerExit(Collider other) {
-        textBox.SetActive(false);
-        textPrompt.SetActive(false);
     }
 }
