@@ -50,7 +50,9 @@ public class CharacterControllerMovement : MonoBehaviour
         }
 
         // Ground check
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = controller.isGrounded;
+
 
         if (isGrounded && velocity.y < 0)
         {
