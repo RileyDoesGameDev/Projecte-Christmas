@@ -1,32 +1,48 @@
 using System;
+using System.Collections.Generic;
+using Unity.Multiplayer.PlayMode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Phone : MonoBehaviour
+public class Server : MonoBehaviour
 {
+    
 
+   
+    public Material material;
     public GameObject currentPlayer = null;
 
+    public List<GameObject> DoorTriggers = new List<GameObject>();
 
-    public event Action OnPhoneAwnsered;
-    
     void Start()
     {
-      
+        material.color = Color.red;
     }
 
     
     void Update()
     {
 
+
+
         if (Keyboard.current.eKey.wasPressedThisFrame && currentPlayer != null)
         {
-            UsePhone();
+            foreach (GameObject obj in DoorTriggers)
+            {
+                obj.GetComponent<RoomTriggers>().Unlocked = true;
+            }
+
+            material.color = Color.green;
         }
 
-        
+
+
        
+
     }
+
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -42,13 +58,6 @@ public class Phone : MonoBehaviour
         {
             currentPlayer = null;
         }
-    }
-
-
-    private void UsePhone()
-    {
-        OnPhoneAwnsered?.Invoke();
-        Destroy(gameObject);
     }
 
 

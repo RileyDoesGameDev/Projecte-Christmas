@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject PizzaOven;
 
     public List<GameObject> DoorTriggers = new List<GameObject>();
+    public List<GameObject> DoorTriggersUnlock = new List<GameObject>();
     
     void Start()
     {
@@ -82,6 +84,11 @@ public class GameManager : MonoBehaviour
             obj.GetComponent<RoomTriggers>().Unlocked = false;
         }
 
+        foreach(GameObject obj in DoorTriggersUnlock)
+        {
+            obj.GetComponent<RoomTriggers>().Unlocked = true;
+        }
+
     }
 
 
@@ -90,4 +97,8 @@ public class GameManager : MonoBehaviour
         Pig.SetActive(true);
     }
 
+    internal void StartLevel(int v)
+    {
+        throw new NotImplementedException();
+    }
 }

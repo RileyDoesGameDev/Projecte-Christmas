@@ -7,6 +7,12 @@ TagManager:
   - Key
   - Pickup
   - Interactable
+  - Server
+  - red
+  - blue
+  - green
+  - yellow
+  - orange
   layers:
   - Default
   - TransparentFX

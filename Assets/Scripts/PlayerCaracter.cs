@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ public class PlayerCharacter : MonoBehaviour
     public InventoryData inventory = new InventoryData();
     private GameObject currentPickupItem = null;
     private GameObject currentInteractable = null;
+ 
+    
 
     public string requiredItem = null;
     private Interactable interactable = null;
@@ -16,13 +19,19 @@ public class PlayerCharacter : MonoBehaviour
     public GameObject pig;
     public bool piging;
 
+   
+
     void Update()
     {
+        
         // Check for E key press in Update (runs every frame)
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
+
+
+            
             // Check for pickup items first
-            if (currentPickupItem != null && !inventory.hasItem)
+             if (currentPickupItem != null && !inventory.hasItem)
             {
                 PickupItem(currentPickupItem);
             }
@@ -37,11 +46,21 @@ public class PlayerCharacter : MonoBehaviour
 
                 }
             }
+
             else if (inventory.hasItem && currentPickupItem != null)
             {
                 Debug.Log("Must drop item first");
             }
+
+            
+
+
+
+
+
+
         }
+
 
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
@@ -62,6 +81,12 @@ public class PlayerCharacter : MonoBehaviour
             rigidbody.linearVelocity = pig.transform.forward * 10;
             piging = false;
         }
+
+
+
+        
+
+
     }
         
     
@@ -77,8 +102,6 @@ public class PlayerCharacter : MonoBehaviour
         else if (other.gameObject.CompareTag("Interactable"))
         {
             currentInteractable = other.gameObject;
-
-            
 
         }
         
@@ -132,4 +155,8 @@ public class PlayerCharacter : MonoBehaviour
         Debug.Log($"Used: {itemObject.name}");
 
     }
+
+   
+
+
 }
